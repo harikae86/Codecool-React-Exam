@@ -3,6 +3,13 @@ import Header from "./components/Header";
 import Laptop from "./components/Laptop";
 import LoadingMask from "./components/LoadingMask";
 
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Stack from "react-bootstrap/Stack";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
 const fetchFromApi = () => {
   const response = fetch("https://demoapi.com/api/laptop").then((res) =>
     res.json()
@@ -24,25 +31,40 @@ const App = () => {
   }, [sortedLaptops]);
 
   return (
-    <div>
-      <Header
-        laptops={laptops}
-        setLaptops={setLaptops}
-        sortedLaptops={sortedLaptops}
-        setSortedLaptops={setSortedLaptops}
-        setSearch={setSearch}
-        search={search}
-      />
-      <h1>Laptops</h1>
-      {loading && <LoadingMask />}
-      {sortedLaptops.length > 0
-        ? sortedLaptops.map((laptop, i) => {
-            return <Laptop laptop={laptop} key={i} />;
-          })
-        : laptops.map((laptop, i) => {
-            return <Laptop laptop={laptop} key={i} />;
-          })}
-    </div>
+    <Stack gap={4} className="col-md-8 mx-auto">
+      <div className="p-4">
+        <Header
+          laptops={laptops}
+          setLaptops={setLaptops}
+          sortedLaptops={sortedLaptops}
+          setSortedLaptops={setSortedLaptops}
+          setSearch={setSearch}
+          search={search}
+        />
+        <h1 className="col-md-2 mx-auto mb-4">Laptops</h1>
+
+        {loading && <LoadingMask />}
+        <Container className="mx-auto text-center mt-4">
+          <Row>
+            {sortedLaptops.length > 0
+              ? sortedLaptops.map((laptop, i) => {
+                  return (
+                    <Col>
+                      <Laptop laptop={laptop} key={i} />
+                    </Col>
+                  );
+                })
+              : laptops.map((laptop, i) => {
+                  return (
+                    <Col>
+                      <Laptop laptop={laptop} key={i} />
+                    </Col>
+                  );
+                })}
+          </Row>
+        </Container>
+      </div>
+    </Stack>
   );
 };
 

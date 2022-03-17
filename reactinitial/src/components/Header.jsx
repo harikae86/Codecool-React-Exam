@@ -1,26 +1,28 @@
 import { useEffect, useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const Header = (props) => {
-  const {
-    laptops,
-    setLaptops,
-    setSortedLaptops,
-    sortedLaptops,
-    setSearch,
-    search,
-  } = props;
+  const { laptops, setSortedLaptops, setSearch, search } = props;
 
-  const clickHandler = () => {
-    const sortedAsc = laptops.sort((a, b) => {
-      return a.weigth - b.weigth;
-    });
-    setSortedLaptops(sortedAsc);
-    if (sortedAsc) {
-      const sortedDesc = sortedAsc.sort((a, b) => {
+  const [isSorted, setIsSorted] = useState(false);
+
+  const clickHandler = (e) => {
+    e.preventDefault();
+    if (isSorted) {
+      const sortedDesc = laptops.sort((a, b) => {
         return b.weigth - a.weigth;
       });
       setSortedLaptops(sortedDesc);
-      console.log(sortedDesc);
+      setIsSorted(false);
+    }
+
+    if (!isSorted) {
+      const sortedAsc = laptops.sort((a, b) => {
+        setIsSorted(true);
+        return a.weigth - b.weigth;
+      });
+      setSortedLaptops(sortedAsc);
     }
   };
 
@@ -32,14 +34,21 @@ const Header = (props) => {
   }, [search]);
 
   return (
-    <>
-      <button onClick={clickHandler}>Sort</button>
-      <input
-        type="text"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-    </>
+    <Form className="mb-3">
+      <Form.Group className="mb-3 d-grid gap-2">
+        <Button size="lg" variant="warning" onClick={clickHandler}>
+          Sort
+        </Button>
+      </Form.Group>
+      <Form.Group className="mb-3" xs={6}>
+        <Form.Control
+          type="text"
+          placeholder="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </Form.Group>
+    </Form>
   );
 };
 
