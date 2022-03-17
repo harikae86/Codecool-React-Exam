@@ -14,6 +14,7 @@ const App = () => {
   const [laptops, setLaptops] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sortedLaptops, setSortedLaptops] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetchFromApi().then((data) => {
@@ -24,7 +25,14 @@ const App = () => {
 
   return (
     <div>
-      <Header laptops={laptops} setSortedLaptops={setSortedLaptops} />
+      <Header
+        laptops={laptops}
+        setLaptops={setLaptops}
+        sortedLaptops={sortedLaptops}
+        setSortedLaptops={setSortedLaptops}
+        setSearch={setSearch}
+        search={search}
+      />
       <h1>Laptops</h1>
       {loading && <LoadingMask />}
       {sortedLaptops.length > 0
