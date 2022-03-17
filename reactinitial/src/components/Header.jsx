@@ -25,12 +25,10 @@ const Header = (props) => {
   };
 
   useEffect(() => {
-    if (search !== "") {
-      const filteredList = laptops.filter((item) => {
-        return item.name.toLowerCase().includes(search);
-      });
-      setSortedLaptops(filteredList);
-    }
+    const filteredList = laptops.filter((item) => {
+      return item.name.toLowerCase().includes(search);
+    });
+    setSortedLaptops(filteredList);
   }, [search]);
 
   return (
