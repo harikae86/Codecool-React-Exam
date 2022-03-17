@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 
 const Header = (props) => {
   const { laptops, setSortedLaptops, setSearch, search } = props;
-
   const [isSorted, setIsSorted] = useState(false);
 
   const clickHandler = (e) => {
