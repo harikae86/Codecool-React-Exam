@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Laptop from "./components/Laptop";
 import LoadingMask from "./components/LoadingMask";
 
 const fetchFromApi = () => {
@@ -24,6 +25,9 @@ const App = () => {
     <div>
       <h1>Laptops</h1>
       {loading && <LoadingMask />}
+      {laptops.map((laptop, i) => {
+        return <Laptop laptop={laptop} key={i} />;
+      })}
     </div>
   );
 };
