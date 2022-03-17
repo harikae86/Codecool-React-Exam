@@ -41,7 +41,7 @@ const App = () => {
           setSearch={setSearch}
           search={search}
         />
-        <h1 className="col-md-2 mx-auto mb-4">Laptops</h1>
+        <h1 className="col-md-2 mx-auto mb-3">Laptops</h1>
 
         {loading && <LoadingMask />}
         <Container className="mx-auto text-center mt-4">
